@@ -4,8 +4,22 @@ require_relative '../lib/rules'
 
 def create_rules
   arr = []
-  arr[0] = FileSize.new('Max. Number of lines per file')
+  arr << FileSize.new('Max. Number of lines per file')
+  arr << MaxLineLength.new('Max. Number of characters per line')
+  arr << Indentation.new('Unexpected indentation')
   arr
+end
+
+
+def display_report
+  Rule.give_report.each do |line|
+    print "#{line[0]} "
+    unless line[1].zero? 
+      print "L: #{line[1]} "
+    end
+    print "#{line[2]} "
+    print "(#{line[3]}) \n"
+  end
 end
 
 input_array = ARGV
@@ -31,4 +45,5 @@ files.each do |file_name|
   file_data = file.readlines.map(&:chomp)
   rules.each{ |rule| rule.parse(file_data, file_name) }
 end
-Rule.give_report.each{|l| puts l}
+
+display_report
