@@ -12,11 +12,10 @@ def create_rules
   arr
 end
 
-
 def display_report
   Rule.give_report.each do |line|
     print "#{line[0]} "
-    unless line[1].zero? 
+    unless line[1].zero?
       print "L: #{line[1]} "
     end
     print "#{line[2]} "
@@ -27,7 +26,7 @@ end
 input_array = ARGV
 files = []
 if input_array.length.zero?
-  files = Dir.glob("**/**.ruby")
+  files = Dir.glob("**/**.rb")
   if files.count.zero?
     puts 'No file was found'
     exit (false)
@@ -45,7 +44,7 @@ rules = create_rules
 files.each do |file_name|
   file = File.open(file_name)
   file_data = file.readlines
+  file.close
   rules.each{ |rule| rule.parse(file_data, file_name) }
 end
-
 display_report

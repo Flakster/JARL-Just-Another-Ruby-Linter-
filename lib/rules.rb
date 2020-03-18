@@ -9,7 +9,7 @@ class Rule
 
   def broken?
     @broken
-  end 
+  end
 
   def parse(arr, name)
   end
@@ -25,11 +25,14 @@ end
 
 class FileSize < Rule
   def parse(file_data, file_name)
+    @line = 0
     data = file_data.map(&:chomp)
     lines = data.count
-    if lines > 3
+    if lines > 100
       @broken = true
       add_to_report(file_name, @line, @name, lines)
+    else
+      @broken = false
     end
     @broken
   end
@@ -38,6 +41,8 @@ end
 class MaxLineLength < Rule
   def parse(file_data, file_name)
     data = file_data.map(&:chomp)
+    @line = 0
+    @broken = false
     data.each do |code_line|
       @line += 1
       char_num = code_line.length
@@ -56,6 +61,8 @@ class Indentation < Rule
     map = build_map(data)
     map = flag_different(map)
     map = discard_erroneous(map)
+    @line = 0
+    @broken = false
     map.each do |line|
       if line[3]
         add_to_report(file_name, line[0], @name, line[1])
@@ -67,17 +74,18 @@ class Indentation < Rule
 
   def build_map(file_data)
     map = []
+    @line = 0
     file_data.each do |code_line|
       @line += 1
       map << [@line, indentation(code_line), guard_clause?(code_line), nil]
     end
     map
   end
-  
+
   def indentation(line)
     indentation = 0
     line.split(//).each do |char|
-      char == ' ' ? indentation += 1 : break 
+      char == ' ' ? indentation += 1 : break
     end
     indentation
   end
@@ -94,7 +102,7 @@ class Indentation < Rule
     former = 0
     map.each do |line|
       line[3] = unexpected?(former, line[1])
-      former = line[1] 
+      former = line[1]
     end
     map
   end
@@ -117,6 +125,8 @@ end
 class TrailingWhiteSpace < Rule
   def parse(file_data, file_name)
     data = file_data.map(&:chomp)
+    @line = 0
+    @broken = false
     data.each do |code_line|
       @line += 1
       chars = code_line.split(//)
@@ -131,12 +141,13 @@ end
 
 class EmptyEOFLine < Rule
   def parse(file_data, file_name)
-    code_line = file_data.last
+    @broken = false
+    code_line = file_data.last.nil? ? '' : file_data.last
     chars = code_line.split(//)
-    last = chars.last 
+    last = chars.last
     unless  last =~  /\n/
-      @broken = true
       add_to_report(file_name, 0, @name, nil)
+      @broken = true
     end
     @broken
   end
