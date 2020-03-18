@@ -19,7 +19,7 @@ class Rule
   end
 
   def self.give_report
-    @@report.sort_by{|a ,b| a[1] <=> b[1] }
+    @@report.sort_by {|a ,b| a[1] <=> b[1] }
   end
 end
 
@@ -109,4 +109,18 @@ class Indentation < Rule
     end
   end
 
+end
+
+class TrailingWhiteSpace < Rule
+  def parse(file_data, file_name)
+    file_data.each do |code_line|
+      @line += 1
+      chars = code_line.split(//)
+      if chars.last == ' '
+        @broken = true
+        add_to_report(file_name, @line, @name, nil )
+      end
+    end
+  end
+  @broken
 end

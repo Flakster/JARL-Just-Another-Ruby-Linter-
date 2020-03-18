@@ -7,6 +7,7 @@ def create_rules
   arr << FileSize.new('Max. Number of lines per file')
   arr << MaxLineLength.new('Max. Number of characters per line')
   arr << Indentation.new('Unexpected indentation')
+  arr << TrailingWhiteSpace.new('Trailing white space')
   arr
 end
 
