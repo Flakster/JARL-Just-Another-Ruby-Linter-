@@ -25,18 +25,20 @@ end
 
 class FileSize < Rule
   def parse(file_data, file_name)
-    lines = file_data.count
+    data = file_data.map(&:chomp)
+    lines = data.count
     if lines > 3
       @broken = true
       add_to_report(file_name, @line, @name, lines)
     end
+    @broken
   end
-  @broken
 end
 
 class MaxLineLength < Rule
   def parse(file_data, file_name)
-    file_data.each do |code_line|
+    data = file_data.map(&:chomp)
+    data.each do |code_line|
       @line += 1
       char_num = code_line.length
       if  char_num > 80
@@ -44,13 +46,14 @@ class MaxLineLength < Rule
         add_to_report(file_name, @line, @name, char_num)
       end
     end
+    @broken
   end
-  @broken
 end
 
 class Indentation < Rule
   def parse(file_data, file_name)
-    map = build_map(file_data)
+    data = file_data.map(&:chomp)
+    map = build_map(data)
     map = flag_different(map)
     map = discard_erroneous(map)
     map.each do |line|
@@ -97,23 +100,24 @@ class Indentation < Rule
   end
 
   def discard_erroneous(map)
+    num_lines = map.count
     map.each_with_index do |line, i|
       if line[3]
         if line[1] && map[i-1][2]
           line[3] = false
         end
-        if map[i+1][3] && map[i-1][1] == map[i+1][1]
+        if i < num_lines - 1 && map[i+1][3] && map[i-1][1] == map[i+1][1]
           map[i+1][3] = false
         end
       end
     end
   end
-
 end
 
 class TrailingWhiteSpace < Rule
   def parse(file_data, file_name)
-    file_data.each do |code_line|
+    data = file_data.map(&:chomp)
+    data.each do |code_line|
       @line += 1
       chars = code_line.split(//)
       if chars.last == ' '
@@ -121,6 +125,19 @@ class TrailingWhiteSpace < Rule
         add_to_report(file_name, @line, @name, nil )
       end
     end
+    @broken
   end
-  @broken
+end
+
+class EmptyEOFLine < Rule
+  def parse(file_data, file_name)
+    code_line = file_data.last
+    chars = code_line.split(//)
+    last = chars.last 
+    unless  last =~  /\n/
+      @broken = true
+      add_to_report(file_name, 0, @name, nil)
+    end
+    @broken
+  end
 end

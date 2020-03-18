@@ -8,6 +8,7 @@ def create_rules
   arr << MaxLineLength.new('Max. Number of characters per line')
   arr << Indentation.new('Unexpected indentation')
   arr << TrailingWhiteSpace.new('Trailing white space')
+  arr << EmptyEOFLine.new('No empty line at EOF')
   arr
 end
 
@@ -43,7 +44,7 @@ end
 rules = create_rules
 files.each do |file_name|
   file = File.open(file_name)
-  file_data = file.readlines.map(&:chomp)
+  file_data = file.readlines
   rules.each{ |rule| rule.parse(file_data, file_name) }
 end
 
