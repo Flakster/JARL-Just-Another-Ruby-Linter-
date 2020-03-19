@@ -13,7 +13,7 @@ JARL is a beginner level linter that checks ruby .rb code files for the followin
 
 # Examples
 
-Max. 80 lines per line
+**Max. 80 lines per line**
 
 _\# Bad_
 
@@ -24,7 +24,7 @@ _\# Good_
     if extra_large_condition1 && extra_large_condition2 &&
       extra_large_condition3 && extra_large_condition4
 
-Use of two spaces of indentation
+**Use of two spaces of indentation**
 
 _\# Bad_
 
@@ -40,7 +40,7 @@ _\# Good_
           puts "Hello #{name}!"
         end
 
-Exception in the line after a guard clause
+**Exception in the line after a guard clause**
 
 _\# Good_
 
@@ -48,7 +48,7 @@ _\# Good_
                           # empty line indentation can be 0 even if previous line is 4
         some other code
  
- No trailing spaces
+ **No trailing spaces**
 
 _\# Bad_
 
@@ -58,7 +58,7 @@ _\# Good_
 
         puts 'Hello, world!'  # the line ends with the last single quote
 
-Lack of EOF empty line
+**Missing  EOF empty line**
 
 _\# Bad_
 
