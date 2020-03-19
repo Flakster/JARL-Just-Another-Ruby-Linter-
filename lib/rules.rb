@@ -1,5 +1,5 @@
 class Rule
-  @@report = []
+  @@report = [] # rubocop:disable Style/ClassVars
   attr_reader :name, :msg, :broken
   def initialize(name)
     @name = name
@@ -110,9 +110,14 @@ class Indentation < Rule
     num_lines = map.count
     map.each_with_index do |line, i|
       next unless line[3]
-      line[3] = false if line[1] && map[i-1][2]
-      map[i + 1][3] = false if i < num_lines - 1 && map[i + 1][3] && map[i - 1][1] == map[i + 1][1]
+
+      line[3] = false if line[1] && map[i - 1][2]
+      map[i + 1][3] = false if i < num_lines - 1 && line_after_empty?(map[i + 1][3], map[i - 1][1], map[i + 1][1])
     end
+  end
+
+  def line_after_empty?(detected, prev_indent, next_indent)
+    detected && prev_indent == next_indent
   end
 end
 
@@ -126,7 +131,7 @@ class TrailingWhiteSpace < Rule
       chars = code_line.split(//)
       if chars.last == ' '
         @broken = true
-        add_to_report( file_name, @line, @name, nil )
+        add_to_report(file_name, @line, @name, nil)
       end
     end
     @broken

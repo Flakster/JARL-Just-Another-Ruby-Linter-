@@ -8,7 +8,7 @@ file_data1 = file.readlines.map(&:chomp)
 file.close
 
 file_name2 = './test/test_file.rb'
-exit (false) unless File.exist?(file_name2)
+exit false unless File.exist?(file_name2)
 file = File.open(file_name2)
 file_data2 = file.readlines.map(&:chomp)
 file.close
