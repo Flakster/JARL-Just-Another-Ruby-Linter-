@@ -9,6 +9,9 @@ JARL is a beginner level linter that checks ruby .rb code files for the followin
 - No trailing spaces
 - Lack of EOF empty line
 
+# Video Presentation
+ You can see a video with the presentation of this project by clicking [here](https://www.loom.com/share/b3c72e55c5ba454ab53f12359fd6c9f1) 
+
 ![JARL](https://user-images.githubusercontent.com/53324035/77028766-ca9c2480-6967-11ea-967e-af28c3ae413b.png)
 
 # Examples
