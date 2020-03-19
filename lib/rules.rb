@@ -11,15 +11,14 @@ class Rule
     @broken
   end
 
-  def parse(arr, name)
-  end
+  def parse(arr, name); end
 
   def add_to_report(file_name, line, name, info)
     @@report << [file_name, line, name, info]
   end
 
   def self.give_report
-    @@report.sort_by {|a ,b| a[1] <=> b[1] }
+    @@report.sort_by { |a, b| a[1] <=> b[1] }
   end
 end
 
@@ -46,7 +45,7 @@ class MaxLineLength < Rule
     data.each do |code_line|
       @line += 1
       char_num = code_line.length
-      if  char_num > 80
+      if char_num > 80
         @broken = true
         add_to_report(file_name, @line, @name, char_num)
       end
@@ -95,7 +94,7 @@ class Indentation < Rule
   end
 
   def unexpected?(former, current)
-    current != former && current != former +2 && current != former -2
+    current != former && current != former + 2 && current != former - 2
   end
 
   def flag_different(map)
@@ -110,14 +109,9 @@ class Indentation < Rule
   def discard_erroneous(map)
     num_lines = map.count
     map.each_with_index do |line, i|
-      if line[3]
-        if line[1] && map[i-1][2]
-          line[3] = false
-        end
-        if i < num_lines - 1 && map[i+1][3] && map[i-1][1] == map[i+1][1]
-          map[i+1][3] = false
-        end
-      end
+      next unless line[3]
+      line[3] = false if line[1] && map[i-1][2]
+      map[i + 1][3] = false if i < num_lines - 1 && map[i + 1][3] && map[i - 1][1] == map[i + 1][1]
     end
   end
 end
@@ -132,7 +126,7 @@ class TrailingWhiteSpace < Rule
       chars = code_line.split(//)
       if chars.last == ' '
         @broken = true
-        add_to_report(file_name, @line, @name, nil )
+        add_to_report( file_name, @line, @name, nil )
       end
     end
     @broken
@@ -145,7 +139,7 @@ class EmptyEOFLine < Rule
     code_line = file_data.last.nil? ? '' : file_data.last
     chars = code_line.split(//)
     last = chars.last
-    unless  last =~  /\n/
+    unless last =~ /\n/
       add_to_report(file_name, 0, @name, nil)
       @broken = true
     end
