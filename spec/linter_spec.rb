@@ -2,13 +2,13 @@
 require_relative '../lib/rules.rb'
 
 file_name1 = './test/enumerable.rb'
-exit (false) unless File.exists?(file_name1)
+exit false unless File.exist?(file_name1)
 file = File.open(file_name1)
 file_data1 = file.readlines.map(&:chomp)
 file.close
 
 file_name2 = './test/test_file.rb'
-exit (false) unless File.exists?(file_name2)
+exit (false) unless File.exist?(file_name2)
 file = File.open(file_name2)
 file_data2 = file.readlines.map(&:chomp)
 file.close
@@ -23,19 +23,19 @@ RSpec.describe FileSize do
       expect(rule_obj.parse(file_data2, file_name2)).to be false
     end
     it 'Adds a report line to the class attribute report' do
-      expect(Rule.give_report.count).to eql (1)
+      expect(Rule.give_report.count).to eql 1
     end
   end
 end
 
 RSpec.describe MaxLineLength do
-  rule_obj =  MaxLineLength.new('Max. Number of characters per line')
+  rule_obj = MaxLineLength.new('Max. Number of characters per line')
   describe '#parse' do
     it 'Checks if the length of any code line in file 1 is more than 80 char' do
       expect(rule_obj.parse(file_data1, file_name1)).to be true
     end
     it 'Adds six report lines to the class attribute report' do
-      expect(Rule.give_report.count).to eql (7)
+      expect(Rule.give_report.count).to eql 7
     end
     it 'Checks if the length of any code line in file 2 is more than 80 char' do
       expect(rule_obj.parse(file_data2, file_name2)).to be false
@@ -53,7 +53,7 @@ RSpec.describe Indentation do
       expect(rule_obj.parse(file_data2, file_name2)).to be true
     end
     it 'Adds a report line to the class attribute report' do
-      expect(Rule.give_report.count).to eql (8)
+      expect(Rule.give_report.count).to eql 8
     end
   end
   describe '#indentation' do
@@ -70,10 +70,10 @@ RSpec.describe Indentation do
   end
   describe '#unexpected?' do
     it 'Returns false if the indentation of a line corresponds with the previous' do
-      expect(rule_obj.unexpected?(2,4)).to be false
+      expect(rule_obj.unexpected?(2, 4)).to be false
     end
     it 'Returns true if the indentation of a line does not correspond with the previous' do
-      expect(rule_obj.unexpected?(0,3)).to be true
+      expect(rule_obj.unexpected?(0, 3)).to be true
     end
   end
 end
@@ -85,13 +85,13 @@ RSpec.describe TrailingWhiteSpace do
       expect(rule_obj.parse(file_data1, file_name1)).to be false
     end
     it 'Adds a report line to the class attribute report' do
-      expect(Rule.give_report.count).to eql (8)
+      expect(Rule.give_report.count).to eql 8
     end
     it 'Checks every code line in file 2 for trailing white spaces' do
       expect(rule_obj.parse(file_data2, file_name2)).to be true
     end
     it 'Adds a report line to the class attribute report' do
-      expect(Rule.give_report.count).to eql (9)
+      expect(Rule.give_report.count).to eql 9
     end
   end
 end
@@ -103,7 +103,7 @@ RSpec.describe EmptyEOFLine do
       expect(rule_obj.parse(file_data2, file_name2)).to be true
     end
     it 'Adds a report line to the class attribute report' do
-      expect(Rule.give_report.count).to eql (10)
+      expect(Rule.give_report.count).to eql 10
     end
   end
 end
