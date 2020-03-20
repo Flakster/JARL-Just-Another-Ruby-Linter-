@@ -15,18 +15,6 @@ class Indentation < Rule
     @broken
   end
 
-  private
-
-  def build_map(file_data)
-    map = []
-    @line = 0
-    file_data.each do |code_line|
-      @line += 1
-      map << [@line, indentation(code_line), guard_clause?(code_line), nil]
-    end
-    map
-  end
-
   def indentation(line)
     indentation = 0
     line.split(//).each do |char|
@@ -41,6 +29,18 @@ class Indentation < Rule
 
   def unexpected?(former, current)
     current != former && current != former + 2 && current != former - 2
+  end
+
+  private
+
+  def build_map(file_data)
+    map = []
+    @line = 0
+    file_data.each do |code_line|
+      @line += 1
+      map << [@line, indentation(code_line), guard_clause?(code_line), nil]
+    end
+    map
   end
 
   def flag_different(map)

@@ -1,5 +1,10 @@
 # ./spec/linter_spec.rb
 require_relative '../lib/rules.rb'
+require_relative '../lib/filesize'
+require_relative '../lib/maxlinelength'
+require_relative '../lib/indentation'
+require_relative '../lib/trailingwhitespace'
+require_relative '../lib/emptyeofline'
 
 file_name1 = './test/enumerable.rb'
 exit false unless File.exist?(file_name1)
