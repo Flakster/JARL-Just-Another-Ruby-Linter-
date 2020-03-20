@@ -19,65 +19,65 @@ JARL is a beginner level linter that checks ruby .rb code files for the followin
 **Max. 80 lines per line**
 
 _\# Bad_
-
+```ruby
     if extra_large_condition1 && extra_large_condition2 && extra_large_condition3 && extra_large_condition4
-
+```
 _\# Good_
-
+```ruby
     if extra_large_condition1 && extra_large_condition2 &&
       extra_large_condition3 && extra_large_condition4
-
+```
 **Use of two spaces of indentation**
 
 _\# Bad_
-
+```ruby
         name = 'Carlos'
         if name.length > 4
             puts "Hello #{name}!" # tab or more than 2 spaces 
         end
-
+```
 _\# Good_
-
+```ruby
         name = 'Carlos'
         if name.length > 4
           puts "Hello #{name}!"
         end
-
+```
 **Exception in the line after a guard clause**
 
 _\# Good_
-
+```ruby
         return unless File.exists?('file_name')
                           # empty line indentation can be 0 even if previous line is 4
         some other code
- 
+ ```
  **No trailing spaces**
 
 _\# Bad_
-
+```ruby
         puts 'Hello, world!' # invisible trailing space here
-
+```
 _\# Good_
-
+```ruby
         puts 'Hello, world!'  # the line ends with the last single quote
-
+```
 **Missing  EOF empty line**
 
 _\# Bad_
-
+```ruby
         name = 'Carlos'
         if name.length > 4
           puts "Hello #{name}!"
         end # file ends here
-
+```
 _\# Good_
-
+```ruby
         name = 'Carlos'
         if name.length > 4
           puts "Hello #{name}!"
         end
         # file ends here
-
+```
 # Getting started
 
 To get a local copy of this repository up and running, follow these steps: 
