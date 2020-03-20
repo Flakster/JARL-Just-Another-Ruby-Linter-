@@ -41,3 +41,12 @@ Layout/ExtraSpacing:
 Layout/MultilineMethodCallIndentation:
   Enabled: true
   EnforcedStyle: indented
+Layout/TrailingWhitespace:
+  Exclude:
+   - "test/**/*"
+Layout/EndAlignment:
+  Exclude:
+   - "test/**/*"
+Layout/TrailingEmptyLines:
+  Exclude:
+   - "test/**/*"
