@@ -1,5 +1,10 @@
 #!/usr/bin/env ruby
 require_relative '../lib/rules'
+require_relative '../lib/filesize'
+require_relative '../lib/maxlinelength'
+require_relative '../lib/indentation'
+require_relative '../lib/trailingwhitespace'
+require_relative '../lib/emptyeofline'
 
 def create_rules
   arr = []
