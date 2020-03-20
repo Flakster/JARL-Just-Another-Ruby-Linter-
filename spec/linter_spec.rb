@@ -16,7 +16,7 @@ file.close
 RSpec.describe FileSize do
   rule_obj = FileSize.new('Max. Number of lines per file')
   describe '#parse' do
-    it 'Compares the number of lines in file2 with the maximum allowed' do
+    it 'Compares the number of lines in file1 with the maximum allowed' do
       expect(rule_obj.parse(file_data1, file_name1)).to be true
     end
     it 'Compares the number of lines in file2 with the maximum allowed' do
