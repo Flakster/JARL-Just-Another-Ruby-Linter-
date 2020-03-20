@@ -15,6 +15,8 @@ class Indentation < Rule
     @broken
   end
 
+  private
+
   def build_map(file_data)
     map = []
     @line = 0

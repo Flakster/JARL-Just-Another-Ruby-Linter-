@@ -12,7 +12,9 @@ class Rule
   def self.give_report
     @@report.sort_by { |a, b| a[1] <=> b[1] }
   end
-  
+
+  private
+
   def broken?
     @broken
   end
