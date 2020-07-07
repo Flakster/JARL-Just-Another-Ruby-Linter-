@@ -1,5 +1,5 @@
 # JARL (Just Another Ruby Linter)
-This is the final project for the Ruby module in the Microverse's full stack remote developer program
+This is the final project for the Ruby module in the Microverse's full-stack remote developer program
 
 JARL is a beginner level linter that checks ruby .rb code files for the following rules:
 - Maximum 100 lines per file
@@ -92,7 +92,7 @@ To get a local copy of this repository up and running, follow these steps:
 # Usage
 
 You can either run the main.rb script without arguments for linting all the .rb ruby code files,
-(including subdirectories) or pass a single file name as an argument to lint that specific file.  
+(including subdirectories) or pass a single filename as an argument to lint that specific file.  
 
 # Prerequisites
   
@@ -119,7 +119,7 @@ directory of the project
 
 # 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!
+Contributions, issues, and feature requests are welcome!
 
 Feel free to check the [issues page.](https://github.com/Flakster/Ruby-capstone-project/issues)
 
