@@ -16,7 +16,7 @@ JARL is a beginner level linter that checks ruby .rb code files for the followin
 
 # Examples
 
-**Max. 80 lines per line**
+**Max. 80 characters per line**
 
 _\# Bad_
 ```ruby
@@ -115,6 +115,7 @@ directory of the project
 
 * Twitter: [@Flakster ](https://twitter.com/Flakster )
 * Github: [@Flakster](https://github.com/Flakster)
+* Email: contact@carlossantamaria.co
 
 # 🤝 Contributing
 
